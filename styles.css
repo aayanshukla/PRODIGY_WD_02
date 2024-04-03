@@ -55,3 +55,7 @@ body{
     font-size: 22px;
     padding: 10px;
 }
+
+#stop, #reset {
+    background: #D2042D;
+}

@@ -14,12 +14,33 @@ timeInterval;
 
 start.onclick= () => {
     timeInterval=setInterval(()=>{
-        
-    },10)
+        ms++
+        if(ms==100){
+            sec++;
+            ms=0;
+        }
+        if(sec==60){
+            mins++;
+            sec=0;
+        }
+        if(mins==60){
+            hrs++;
+            mins=0;
+        }
+        stopwatch.innerHTML = ` ${zeroPad(hrs)}:${zeroPad(mins)}:${zeroPad(sec)}:${zeroPad(ms)}`;
+    },10);
+    start.setAttribute("style", "display:none");
+    stp.setAttribute("style", "display:block");
+    lap.setAttribute("style", "display:block");
+    reset.setAttribute("style", "display:none");
 };
 
+const zeroPad=(num)=>{
+    return String(num).padStart(2,"0");
+}
+
 stp.onclick= () => {
-    console.log("stop");
+    clearInterval(timeInterval);
 };
 
 lap.onclick= () => {
