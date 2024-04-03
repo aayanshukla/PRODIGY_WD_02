@@ -33,6 +33,7 @@ start.onclick= () => {
     stp.setAttribute("style", "display:block");
     lap.setAttribute("style", "display:block");
     reset.setAttribute("style", "display:none");
+    lap.removeAttribute("disabled");
 };
 
 const zeroPad=(num)=>{
@@ -41,12 +42,31 @@ const zeroPad=(num)=>{
 
 stp.onclick= () => {
     clearInterval(timeInterval);
+    reset.setAttribute("style", "display:block");
+    lap.setAttribute("style", "display:none");
+    stp.setAttribute("style", "display:none");
+    start.setAttribute("style", "display: block");
+    start.innerHTML="Resume"
 };
-
+let count=0;
 lap.onclick= () => {
-    console.log("lap");
+    count++;
+    let li=document.createElement("li");
+    li.innerHTML = ` ${"~" + count + " "} > ${zeroPad(hrs)}:${zeroPad(mins)}:${zeroPad(sec)}:${zeroPad(ms)}`;
+    laps.appendChild(li);
+    laps.scroll({top:laps.scrollHeight,behavior: "smooth"});
 };
 
 reset.onclick= () => {
-    console.log("reset");
+    hrs=mins=sec=ms=count=0;
+    laps.innerHTML= "";
+    clearInterval(timeInterval);
+    stopwatch.innerHTML="00:00:00:00";
+
+    start.innerHTML="Start";
+    lap.setAttribute("style","display:block");
+    lap.setAttribute("disabled",true);
+    start.setAttribute("style","display:block");
+    reset.setAttribute("style","display:none");
+    stp.setAttribute("style","display:none");
 };
